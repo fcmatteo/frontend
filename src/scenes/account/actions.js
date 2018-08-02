@@ -71,7 +71,7 @@ export const update_user_service_status = e => async dispatch => {
 
 export const update_user_avatar = (file) => {
   return async dispatch => {
-    let user = Parse.User.current();
+    const user = Parse.User.current();
     let parseFile;
     if (file) {
       const filename = generateFilename(file.name);
@@ -82,7 +82,7 @@ export const update_user_avatar = (file) => {
     user.set('profilePicture', parseFile);
     user.save(null, {
       success: function(update) {
-        let json_user = user.toJSON();
+        const json_user = user.toJSON();
         dispatch(user_profile_fetched({ user_profile: json_user }));
         dispatch(edit_user_error_raised({}));
       },
@@ -93,7 +93,7 @@ export const update_user_avatar = (file) => {
             error: 'Could not update user avatar.',
           }),
         );
-        let json_user = user.toJSON();
+        const json_user = user.toJSON();
         dispatch(user_profile_fetched({ user_profile: json_user }));
       },
     });
